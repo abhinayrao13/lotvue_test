@@ -61,6 +61,17 @@ class RolesController < ApplicationController
     end
   end
 
+  def hide_roles
+    @roles = Role.all
+  end
+
+  def update_hide_roles
+    @result = Role.where(id: params[:role_ids]).update_all(hidden: true)
+    respond_to do |format|
+      format.html { redirect_to roles_path, notice: 'Roles hidden successfully.' }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_role

@@ -1,0 +1,12 @@
+<%= form_tag(update_hide_roles_roles_path, :method => "post") do %>
+  <% @roles.each do |role| %>
+    <div class="field">
+      <%= check_box_tag "role_ids[]", role.id %>
+      <%= label_tag role.role_type %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= submit_tag "Hide roles" %>
+  </div>
+<% end %>
