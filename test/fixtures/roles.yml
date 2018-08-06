@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  role_type: MyString
+  hidden: false
+
+two:
+  role_type: MyString
+  hidden: false
