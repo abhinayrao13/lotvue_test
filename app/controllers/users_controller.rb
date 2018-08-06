@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = User.includes(:roles).all
   end
 
   # GET /users/1
@@ -15,10 +15,12 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @roles = Role.where(hidden: false)
   end
 
   # GET /users/1/edit
   def edit
+    @roles = Role.all
   end
 
   # POST /users
@@ -69,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name)
+      params.require(:user).permit(:email, :first_name, :last_name, :role_ids => [], user_metas_attributes: [:id, :meta_key, :meta_value, :_destroy])
     end
 end
