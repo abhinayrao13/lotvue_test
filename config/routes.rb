@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "roles#index"
   resources :users do
     collection do
       get '/show_users' => 'users#show_users_based_on_roles'
