@@ -1,5 +1,9 @@
-<%= f.label :meta_key %>
-<%= f.text_field :meta_key %>
-<%= f.label :meta_value %>
-<%= f.text_field :meta_value %>
-<%= link_to_remove_association "remove task", f %>
+<div class="form-group">
+  <%= f.label :meta_key %>
+  <%= f.text_field :meta_key, class: "form-control", placeholder: "Enter meta key" %>
+</div>
+<div class="form-group">
+  <%= f.label :meta_value %>
+  <%= f.text_field :meta_value, class: "form-control", placeholder: "Enter meta value" %>
+</div>
+<%= link_to_remove_association "Remove user meta", f %>

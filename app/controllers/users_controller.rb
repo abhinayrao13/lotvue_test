@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_roles, only: [:index, :new, :edit]
 
   # GET /users
   # GET /users.json
@@ -15,12 +16,10 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @roles = Role.where(hidden: false)
   end
 
   # GET /users/1/edit
   def edit
-    @roles = Role.all
   end
 
   # POST /users
@@ -43,6 +42,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
+      @user.roles.destroy_all
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
@@ -63,14 +63,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_users_based_on_roles
+    @users = User.all.select{ |u| u.roles.blank? }.pluck(:email, :first_name, :last_name)
+    respond_to do |format|
+      format.html { }
+      format.json { render json: {users: @users} }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end
 
+    def set_roles
+      @roles = Role.where(hidden: false)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :first_name, :last_name, :role_ids => [], user_metas_attributes: [:id, :meta_key, :meta_value, :_destroy])
+      params.require(:user).permit(:email, :first_name, :last_name, images: [], role_ids: [], user_metas_attributes: [:id, :meta_key, :meta_value, :_destroy])
     end
 end

@@ -66,7 +66,9 @@ class RolesController < ApplicationController
   end
 
   def update_hide_roles
-    @result = Role.where(id: params[:role_ids]).update_all(hidden: true)
+    Role.all.update_all(hidden: false)
+    Role.where(id: params[:role_ids]).update_all(hidden: true)
+    RolesUser.where(role_id: params[:role_ids]).destroy_all
     respond_to do |format|
       format.html { redirect_to roles_path, notice: 'Roles hidden successfully.' }
     end

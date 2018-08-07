@@ -7,9 +7,39 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
   </head>
 
   <body>
+    <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Logo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <% hide_roles_action = params[:action] == 'hide_roles' %>
+          <% show_users_action = params[:action] == 'show_users_based_on_roles' %>
+          <li class="nav-item <%= (params[:controller] == 'roles' && !hide_roles_action) ? 'active' : '' %>">
+            <a class="nav-link" href="<%= roles_path %>">Roles <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item <%= (params[:controller] == 'roles' && hide_roles_action) ? 'active' : '' %>">
+            <a class="nav-link" href="<%= hide_roles_roles_path %>">Hide Roles <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item <%= (params[:controller] == 'users' && !show_users_action) ? 'active' : '' %>">
+            <a class="nav-link" href="<%= users_path %>">Users <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item <%= (params[:controller] == 'users' && show_users_action) ? 'active' : '' %>">
+            <a class="nav-link" href="<%= show_users_users_path %>">Show users <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    </div>
     <%= yield %>
+    <%= yield :javascript_includes %>
   </body>
 </html>

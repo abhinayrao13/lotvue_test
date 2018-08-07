@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    collection do
+      get '/show_users' => 'users#show_users_based_on_roles'
+    end
+  end
   resources :roles do
     collection do
       get '/hide_roles' => 'roles#hide_roles'

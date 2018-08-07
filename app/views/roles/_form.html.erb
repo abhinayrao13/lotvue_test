@@ -11,12 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :role_type %>
-    <%= form.text_field :role_type %>
-  </div>
+  <div class="row">
+    <div class="col-md-6">
 
-  <div class="actions">
-    <%= form.submit %>
+      <div class="form-group">
+        <%= form.label :role_type %>
+        <%= form.text_field :role_type, class: "form-control", placeholder: "Enter role type" %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit 'Submit', class: "btn btn-success float-left" %>
+        <%= link_to 'Back', roles_path, class: "btn btn-primary float-right"  %>
+      </div>
+
+    </div>
   </div>
 <% end %>

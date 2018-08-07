@@ -11,34 +11,44 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control", placeholder: "Enter email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
-  </div>
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control", placeholder: "Enter first name" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control", placeholder: "Enter last name" %>
+    </div>
 
-  <div class="field">
-    <%= label_tag :role %>
-    <%= select_tag "user[role_ids]", options_from_collection_for_select(@roles, "id", "role_type", @user.roles.ids), multiple: true %>
-  </div>
+    <div class="form-group">
+      <%= label_tag :role %>
+      <%= select_tag "user[role_ids][]", options_from_collection_for_select(@roles, "id", "role_type", @user.roles.ids), multiple: true, class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.fields_for :user_metas do |user_meta| %>
-      <%= render 'user_meta_fields', :f => user_meta %>
-    <% end %>
-    <p><%= link_to_add_association 'Add a User Meta', f, :user_metas %></p>
-  </div>
+    <div class="form-group">
+      <%= f.fields_for :user_metas do |user_meta| %>
+        <%= render 'user_meta_fields', :f => user_meta %>
+      <% end %>
+      <p><%= link_to_add_association 'Add a User Meta', f, :user_metas %></p>
+    </div>
 
-  <div class="actions">
-    <%= f.submit %>
+    <div class="form-group">
+      <%= label_tag :images %>
+      <%= f.file_field :images, accept: 'image/png,image/jpeg', :multiple => true, class: "form-control-file" %><br>
+    </div>
+
+    <div class="actions">
+      <%= f.submit 'Submit', class: "btn btn-success float-left" %>
+      <%= link_to 'Back', users_path, class: "btn btn-primary float-right" %>
+    </div>
   </div>
+</div>
 <% end %>
