@@ -15,12 +15,12 @@
   <%= @user.last_name %>
 </p>
 
-<p>
   <% @user.user_metas.each do |user_meta| %>
+  <p>
     <strong><%= user_meta.meta_key.capitalize %>:</strong>
     <%= user_meta.meta_value.capitalize %>
+  </p>
   <% end %>
-</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
